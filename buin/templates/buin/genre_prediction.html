@@ -5,42 +5,90 @@
     <title>Prediksi Popularitas Genre</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        .chart-container {
-            width: 80%;
-            margin: auto;
+        body {
+            font-family: sans-serif;
+            background-color: #f0f2f5;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+        .chart-card {
+            width: 70%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body>
-    <h1 style="text-align: center;">Prediksi Popularitas Genre di Masa Mendatang</h1>
-    <div class="chart-container">
-        <canvas id="genreChart"></canvas>
-    </div>
+    <h1>Perbandingan Data Asli Genre dengan Garis Tren (Regresi)</h1>
+
+    <div id="charts-container">
+        </div>
 
     <script>
-        const ctx = document.getElementById('genreChart').getContext('2d');
-        const chartData = JSON.parse('{{ chart_data|safe }}');
+        const chartsData = JSON.parse('{{ charts_data_json|safe }}');
+        const container = document.getElementById('charts-container');
 
-        new Chart(ctx, {
-            type: 'line',
-            data: chartData,
-            options: {
-                responsive: true,
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'Tren Popularitas Genre (Aktual vs. Prediksi)'
-                    }
+        chartsData.forEach((chartData, index) => {
+            // Buat card container untuk setiap grafik
+            const card = document.createElement('div');
+            card.className = 'chart-card';
+
+            // Buat elemen canvas
+            const canvas = document.createElement('canvas');
+            canvas.id = `genreChart${index}`;
+            card.appendChild(canvas);
+
+            // Tambahkan card ke container utama
+            container.appendChild(card);
+
+            // Inisialisasi Chart.js
+            const ctx = canvas.getContext('2d');
+            new Chart(ctx, {
+                type: 'scatter', // Tipe default, bisa di-override per dataset
+                data: {
+                    datasets: chartData.datasets
                 },
-                scales: {
-                    x: {
-                        title: { display: true, text: 'Tahun Rilis' }
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: chartData.title,
+                            font: {
+                                size: 18
+                            }
+                        }
                     },
-                    y: {
-                        title: { display: true, text: 'Jumlah Kemunculan' }
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            position: 'bottom',
+                            title: {
+                                display: true,
+                                text: 'Tahun'
+                            },
+                            ticks: {
+                                // Format angka tahun agar tidak ada koma
+                                callback: function(value, index, values) {
+                                    return value.toString();
+                                }
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Jumlah Film'
+                            }
+                        }
                     }
                 }
-            }
+            });
         });
     </script>
 </body>
