@@ -14,9 +14,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+# django_uas/urls.py
+
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from buin import views as buin_views # <-- 1. Import views dari aplikasi buin
 
 urlpatterns = [
+    path('', buin_views.index, name='index'), # <-- 2. Tambahkan baris ini untuk halaman utama
     path('admin/', admin.site.urls),
+    path('buin/', include('buin.urls')),
 ]

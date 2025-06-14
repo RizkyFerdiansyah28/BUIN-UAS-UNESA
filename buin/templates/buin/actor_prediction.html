@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediksi Popularitas Aktor</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            width: 80%;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Prediksi Popularitas Aktor di Masa Mendatang (Top 5)</h1>
+    <div class="chart-container">
+        <canvas id="actorChart"></canvas>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('actorChart').getContext('2d');
+        const chartData = JSON.parse('{{ chart_data|safe }}');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: chartData,
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Tren Popularitas Aktor (Aktual vs. Prediksi)'
+                    }
+                },
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Tahun Rilis' }
+                    },
+                    y: {
+                        title: { display: true, text: 'Jumlah Penampilan' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

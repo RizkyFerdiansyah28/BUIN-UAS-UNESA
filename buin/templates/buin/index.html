@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Visualisasi</title>
+</head>
+<body>
+    <h1>Selamat Datang di Dashboard Visualisasi Film</h1>
+    <p>Silakan pilih salah satu halaman di bawah ini:</p>
+    <ul>
+        <li><a href="{% url 'genre_prediction' %}">Prediksi Popularitas Genre</a></li>
+        <li><a href="{% url 'actor_prediction' %}">Prediksi Popularitas Aktor</a></li>
+        <li><a href="{% url 'top_movies' %}">Daftar Film Rating Tertinggi</a></li>
+    </ul>
+</body>
+</html>

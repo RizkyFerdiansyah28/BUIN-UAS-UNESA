@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediksi Popularitas Genre</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            width: 80%;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Prediksi Popularitas Genre di Masa Mendatang</h1>
+    <div class="chart-container">
+        <canvas id="genreChart"></canvas>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('genreChart').getContext('2d');
+        const chartData = JSON.parse('{{ chart_data|safe }}');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: chartData,
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Tren Popularitas Genre (Aktual vs. Prediksi)'
+                    }
+                },
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Tahun Rilis' }
+                    },
+                    y: {
+                        title: { display: true, text: 'Jumlah Kemunculan' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

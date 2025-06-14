@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Top 10 Film Berdasarkan Rating</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+        h1 {
+            text-align: center;
+        }
+        .table-container {
+            width: 50%; /* Atur lebar tabel */
+            margin: 20px auto; /* Trik untuk membuat elemen di tengah secara horizontal */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Top 10 Film dengan Rating Tertinggi</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Judul Film</th>
+                    <th>Rating</th>
+                    <th>Jumlah Suara</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for movie in movies %}
+                <tr>
+                    <td>{{ movie.title }}</td>
+                    <td>{{ movie.rating }}</td>
+                    <td>{{ movie.votes }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

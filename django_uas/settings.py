@@ -30,6 +30,8 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+# django_uas/settings.py
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'buin',  # <-- TAMBAHKAN BARIS INI
 ]
 
 MIDDLEWARE = [
