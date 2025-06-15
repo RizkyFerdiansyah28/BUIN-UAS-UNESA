@@ -43,8 +43,9 @@ class FactMovie(models.Model):
 
     # Metrik atau fakta yang diukur
     title = models.CharField(max_length=255, help_text="Judul film")
-    rating = models.FloatField(help_text="Rating film")
-    votes = models.IntegerField(help_text="Jumlah suara yang diberikan untuk film")
+    # Tambahkan default=0 pada rating dan votes
+    rating = models.FloatField(default=0, help_text="Rating film")
+    votes = models.IntegerField(default=0, help_text="Jumlah suara yang diberikan untuk film")
     actor_appearance_count = models.IntegerField(default=0, help_text="Jumlah kemunculan aktor dalam satu tahun")
     genre_appearance_count = models.IntegerField(default=0, help_text="Jumlah kemunculan genre dalam satu tahun")
 
